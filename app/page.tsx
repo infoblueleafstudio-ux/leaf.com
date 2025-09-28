@@ -111,10 +111,11 @@ export default function HomePage() {
             園ごとの<span className="text-blue-300">"らしさ"</span>をカタチに、<br />
             <span className="text-green-300">魅力</span>を発信するホームページ
           </h1>
-          <p className={`text-xl md:text-2xl text-white mb-12 max-w-4xl mx-auto leading-relaxed ${isVisible ? 'animate-fade-up' : 'opacity-0'}`} style={{animationDelay: '0.2s'}}>
-            幼稚園・保育園専門のデザインと運用で、<br />
-            見学希望・入園相談を確実に増やします
-          </p>
+          <p className="text-xl md:text-2xl text-white mb-12 max-w-3xl mx-auto leading-relaxed text-center">
+  幼稚園・保育園専門のデザインと運用で<br className="sm:hidden" />
+  見学希望・入園相談を確実に増やします
+</p>
+
           <div className={`flex justify-center ${isVisible ? 'animate-fade-up' : 'opacity-0'}`} style={{animationDelay: '0.4s'}}>
             <a 
               href="#"
@@ -235,10 +236,14 @@ export default function HomePage() {
 
           <Swiper
             modules={[Autoplay, Pagination]}
-            spaceBetween={30}
+            spaceBetween={20}
             slidesPerView={1}
             breakpoints={{
-              768: {
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+              },
+              1024: {
                 slidesPerView: 3,
                 spaceBetween: 30,
               },
