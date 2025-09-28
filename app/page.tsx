@@ -2,6 +2,10 @@
 
 import React, { useEffect, useState } from 'react';
 import { Globe, Smartphone, Headphones, CircleCheck as CheckCircle, Star, ArrowRight, Menu, X } from 'lucide-react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 export default function HomePage() {
   const [isVisible, setIsVisible] = useState(false);
@@ -229,58 +233,82 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-10">
-            <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl hover:-translate-y-2 transition-all duration-300 animate-on-scroll">
-              <div className="h-56 bg-gradient-to-br from-primary-blue to-blue-200 flex items-center justify-center">
-                <div className="text-white text-center">
-                  <h4 className="text-2xl font-bold mb-2">さくら幼稚園</h4>
-                  <p>園児数120名</p>
+          <Swiper
+            modules={[Autoplay, Pagination]}
+            spaceBetween={30}
+            slidesPerView={1}
+            breakpoints={{
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+              },
+            }}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+            pagination={{
+              clickable: true,
+            }}
+            className="mySwiper"
+          >
+            <SwiperSlide>
+              <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                <div className="h-56 bg-gradient-to-br from-primary-blue to-blue-200 flex items-center justify-center">
+                  <div className="text-white text-center">
+                    <h4 className="text-2xl font-bold mb-2">さくら幼稚園</h4>
+                    <p>園児数120名</p>
+                  </div>
+                </div>
+                <div className="p-8">
+                  <p className="text-gray-600 mb-4 leading-relaxed">
+                    <span className="font-bold text-primary-green">入園希望者120%増加</span>
+                  </p>
+                  <p className="text-sm text-gray-500 italic">
+                    「ホームページリニューアル後、問い合わせ件数が倍増しました。」
+                  </p>
                 </div>
               </div>
-              <div className="p-8">
-                <p className="text-gray-600 mb-6 leading-relaxed">
-                  ホームページリニューアル後、入園相談の件数が<span className="font-bold text-primary-green">1.5倍に増加</span>しました。
-                </p>
-                <p className="text-sm text-gray-500 italic">
-                  「保護者の方から『ホームページが見やすくて安心した』という声をよくいただくようになりました。」
-                </p>
-              </div>
-            </div>
+            </SwiperSlide>
 
-            <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl hover:-translate-y-2 transition-all duration-300 animate-on-scroll">
-              <div className="h-56 bg-gradient-to-br from-primary-green to-green-200 flex items-center justify-center">
-                <div className="text-white text-center">
-                  <h4 className="text-2xl font-bold mb-2">みどり保育園</h4>
-                  <p>園児数85名</p>
+            <SwiperSlide>
+              <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                <div className="h-56 bg-gradient-to-br from-primary-green to-green-200 flex items-center justify-center">
+                  <div className="text-white text-center">
+                    <h4 className="text-2xl font-bold mb-2">みどり保育園</h4>
+                    <p>園児数85名</p>
+                  </div>
+                </div>
+                <div className="p-8">
+                  <p className="text-gray-600 mb-4 leading-relaxed">
+                    <span className="font-bold text-primary-green">園児数85%増加</span>
+                  </p>
+                  <p className="text-sm text-gray-500 italic">
+                    「写真ギャラリー機能が好評で、保護者から安心の声が寄せられています。」
+                  </p>
                 </div>
               </div>
-              <div className="p-8">
-                <p className="text-gray-600 mb-6 leading-relaxed">
-                  PWAアプリの導入により、保護者の<span className="font-bold text-primary-green">満足度が大幅に向上</span>しました。
-                </p>
-                <p className="text-sm text-gray-500 italic">
-                  「お便り配信が楽になり、保護者との連絡もスムーズになりました。」
-                </p>
-              </div>
-            </div>
+            </SwiperSlide>
 
-            <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl hover:-translate-y-2 transition-all duration-300 animate-on-scroll">
-              <div className="h-56 bg-gradient-to-br from-primary-blue to-blue-200 flex items-center justify-center">
-                <div className="text-white text-center">
-                  <h4 className="text-2xl font-bold mb-2">ひまわり幼稚園</h4>
-                  <p>園児数200名</p>
+            <SwiperSlide>
+              <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                <div className="h-56 bg-gradient-to-br from-primary-blue to-blue-200 flex items-center justify-center">
+                  <div className="text-white text-center">
+                    <h4 className="text-2xl font-bold mb-2">ひまわり幼稚園</h4>
+                    <p>園児数200名</p>
+                  </div>
+                </div>
+                <div className="p-8">
+                  <p className="text-gray-600 mb-4 leading-relaxed">
+                    <span className="font-bold text-primary-green">入園希望者200%増加</span>
+                  </p>
+                  <p className="text-sm text-gray-500 italic">
+                    「ブログ更新機能を導入し、園の日常が伝わりやすくなりました。」
+                  </p>
                 </div>
               </div>
-              <div className="p-8">
-                <p className="text-gray-600 mb-6 leading-relaxed">
-                  総合的なデジタル化により、<span className="font-bold text-primary-green">業務効率が40%向上</span>しました。
-                </p>
-                <p className="text-sm text-gray-500 italic">
-                  「先生たちの事務作業が軽減され、子どもたちと向き合う時間が増えました。」
-                </p>
-              </div>
-            </div>
-          </div>
+            </SwiperSlide>
+          </Swiper>
         </div>
       </section>
 
