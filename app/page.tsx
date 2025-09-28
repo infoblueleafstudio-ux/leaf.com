@@ -41,7 +41,7 @@ export default function HomePage() {
                 <img 
                   src="/logo.png" 
                   alt="BlueLeaf Studio" 
-                  className="h-10 w-auto"
+                  className="h-16 w-auto"
                 />
               </a>
             </div>
@@ -98,31 +98,27 @@ export default function HomePage() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative pt-20 pb-16 min-h-screen flex items-center">
-        {/* Background Image */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-green-50 to-yellow-50">
-          <div className="absolute inset-0 bg-white/30"></div>
-        </div>
+      <section className="relative min-h-screen flex items-center justify-center" style={{backgroundImage: 'url(\'/hero.jpg\')', backgroundSize: 'cover', backgroundPosition: 'center'}}>
+        {/* Black overlay */}
+        <div className="absolute inset-0 bg-black/40"></div>
         
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className={`text-4xl md:text-6xl font-bold text-gray-900 mb-6 ${isVisible ? 'animate-fade-up' : 'opacity-0'}`}>
-              園ごとの<span className="text-primary-blue">"らしさ"</span>をカタチに、<br />
-              <span className="text-primary-green">魅力</span>を発信するホームページ
-            </h1>
-            <p className={`text-xl md:text-2xl text-gray-700 mb-12 max-w-4xl mx-auto leading-relaxed ${isVisible ? 'animate-fade-up' : 'opacity-0'}`} style={{animationDelay: '0.2s'}}>
-              幼稚園・保育園専門のデザインと運用で、<br />
-              見学希望・入園相談を確実に増やします
-            </p>
-            <div className={`flex justify-center ${isVisible ? 'animate-fade-up' : 'opacity-0'}`} style={{animationDelay: '0.4s'}}>
-              <a 
-                href="#"
-                className="bg-primary-green text-white px-12 py-6 rounded-full text-xl font-bold hover:bg-opacity-90 hover:-translate-y-2 hover:scale-110 transition-all duration-300 shadow-2xl inline-flex items-center"
-              >
-                LINEで無料相談
-                <ArrowRight className="ml-3" size={24} />
-              </a>
-            </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className={`text-4xl md:text-6xl font-bold text-white mb-6 ${isVisible ? 'animate-fade-up' : 'opacity-0'}`}>
+            園ごとの<span className="text-blue-300">"らしさ"</span>をカタチに、<br />
+            <span className="text-green-300">魅力</span>を発信するホームページ
+          </h1>
+          <p className={`text-xl md:text-2xl text-white mb-12 max-w-4xl mx-auto leading-relaxed ${isVisible ? 'animate-fade-up' : 'opacity-0'}`} style={{animationDelay: '0.2s'}}>
+            幼稚園・保育園専門のデザインと運用で、<br />
+            見学希望・入園相談を確実に増やします
+          </p>
+          <div className={`flex justify-center ${isVisible ? 'animate-fade-up' : 'opacity-0'}`} style={{animationDelay: '0.4s'}}>
+            <a 
+              href="#"
+              className="bg-primary-green text-white px-12 py-6 rounded-full text-xl font-bold hover:bg-opacity-90 hover:-translate-y-2 hover:scale-110 transition-all duration-300 shadow-2xl inline-flex items-center"
+            >
+              LINEで無料相談
+              <ArrowRight className="ml-3" size={24} />
+            </a>
           </div>
         </div>
       </section>
