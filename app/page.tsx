@@ -37,9 +37,13 @@ export default function HomePage() {
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <h1 className="text-2xl font-bold text-primary-blue">
-                BlueLeaf Studio
-              </h1>
+              <a href="/" className="block">
+                <img 
+                  src="/logo.png" 
+                  alt="BlueLeaf Studio" 
+                  className="h-28 w-auto"
+                />
+              </a>
             </div>
 
             {/* Desktop Navigation */}
@@ -110,10 +114,10 @@ export default function HomePage() {
       <section className="pt-20 pb-16 bg-gradient-to-br from-pale-blue via-white to-light-cyan">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className={`text-4xl md:text-6xl font-bold text-gray-900 mb-6 ${isVisible ? 'animate-fade-up' : 'opacity-0'}`}>
-              子どもと保護者に寄り添う、<br />
-              <span className="text-primary-blue">安心の園ホームページを</span>
-            </h1>
+          <h1 className={`text-4xl md:text-6xl font-bold text-gray-900 mb-6 ${isVisible ? 'animate-fade-up' : 'opacity-0'}`}>
+  園ごとの<span className="text-primary-blue">“らしさ”</span>をカタチに、<br />
+  <span className="text-primary-green">魅力</span>を発信するホームページ
+</h1>
             <p className={`text-xl md:text-2xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed ${isVisible ? 'animate-fade-up' : 'opacity-0'}`} style={{animationDelay: '0.2s'}}>
               幼稚園・保育園専門のデザインと運用で、<br />
               見学希望・入園相談を確実に増やします
