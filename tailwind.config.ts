@@ -21,7 +21,8 @@ const config: Config = {
       },
       colors: {
         // カスタムカラーパレット
-        'primary-blue': '#71A5EF',
+        'primary-blue': '#3B82F6',
+        'primary-green': '#10B981',
         'accent-green': '#5CCE7C',
         'light-cyan': '#B0D8DF',
         'pale-blue': '#DDEBF7',
