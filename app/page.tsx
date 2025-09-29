@@ -259,13 +259,25 @@ export default function HomePage() {
           >
             <SwiperSlide>
               <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
-                <div className="h-56 bg-gradient-to-br from-primary-blue to-blue-200 flex items-center justify-center">
-                  <div className="text-white text-center">
-                    <h4 className="text-2xl font-bold mb-2">さくら幼稚園</h4>
-                    <p>園児数120名</p>
+                {/* 上半分：背景画像 */}
+                <div 
+                  className="h-48 sm:h-56 relative flex items-center justify-center"
+                  style={{
+                    backgroundImage: 'url(\'/Image_fx (1).jpg\')',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
+                  }}
+                >
+                  {/* 半透明の黒いオーバーレイ */}
+                  <div className="absolute inset-0 bg-black/40"></div>
+                  {/* 背景画像の上にテキスト */}
+                  <div className="relative text-white text-center z-10 px-4">
+                    <h4 className="text-xl sm:text-2xl font-bold mb-2">さくら幼稚園</h4>
+                    <p className="text-base sm:text-lg">園児数120名</p>
                   </div>
                 </div>
-                <div className="p-8">
+                {/* 下半分：白地のテキスト部分 */}
+                <div className="p-6 sm:p-8 text-center">
                   <p className="text-gray-600 mb-4 leading-relaxed">
                     <span className="font-bold text-primary-green">入園希望者120%増加</span>
                   </p>
@@ -278,13 +290,25 @@ export default function HomePage() {
 
             <SwiperSlide>
               <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
-                <div className="h-56 bg-gradient-to-br from-primary-green to-green-200 flex items-center justify-center">
-                  <div className="text-white text-center">
-                    <h4 className="text-2xl font-bold mb-2">みどり保育園</h4>
-                    <p>園児数85名</p>
+                {/* 上半分：背景画像 */}
+                <div 
+                  className="h-48 sm:h-56 relative flex items-center justify-center"
+                  style={{
+                    backgroundImage: 'url(\'/Image_fx (2).jpg\')',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
+                  }}
+                >
+                  {/* 半透明の黒いオーバーレイ */}
+                  <div className="absolute inset-0 bg-black/40"></div>
+                  {/* 背景画像の上にテキスト */}
+                  <div className="relative text-white text-center z-10 px-4">
+                    <h4 className="text-xl sm:text-2xl font-bold mb-2">みどり保育園</h4>
+                    <p className="text-base sm:text-lg">園児数85名</p>
                   </div>
                 </div>
-                <div className="p-8">
+                {/* 下半分：白地のテキスト部分 */}
+                <div className="p-6 sm:p-8 text-center">
                   <p className="text-gray-600 mb-4 leading-relaxed">
                     <span className="font-bold text-primary-green">園児数85%増加</span>
                   </p>
@@ -297,13 +321,25 @@ export default function HomePage() {
 
             <SwiperSlide>
               <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
-                <div className="h-56 bg-gradient-to-br from-primary-blue to-blue-200 flex items-center justify-center">
-                  <div className="text-white text-center">
-                    <h4 className="text-2xl font-bold mb-2">ひまわり幼稚園</h4>
-                    <p>園児数200名</p>
+                {/* 上半分：背景画像 */}
+                <div 
+                  className="h-48 sm:h-56 relative flex items-center justify-center"
+                  style={{
+                    backgroundImage: 'url(\'/Image_fx (3).jpg\')',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
+                  }}
+                >
+                  {/* 半透明の黒いオーバーレイ */}
+                  <div className="absolute inset-0 bg-black/40"></div>
+                  {/* 背景画像の上にテキスト */}
+                  <div className="relative text-white text-center z-10 px-4">
+                    <h4 className="text-xl sm:text-2xl font-bold mb-2">ひまわり幼稚園</h4>
+                    <p className="text-base sm:text-lg">園児数200名</p>
                   </div>
                 </div>
-                <div className="p-8">
+                {/* 下半分：白地のテキスト部分 */}
+                <div className="p-6 sm:p-8 text-center">
                   <p className="text-gray-600 mb-4 leading-relaxed">
                     <span className="font-bold text-primary-green">入園希望者200%増加</span>
                   </p>
