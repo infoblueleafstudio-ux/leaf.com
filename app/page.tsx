@@ -2,17 +2,25 @@
 
 import React, { useEffect, useState } from 'react';
 import { Globe, Smartphone, Headphones, CircleCheck as CheckCircle, Star, ArrowRight, Menu, X } from 'lucide-react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
 
 export default function HomePage() {
   const [isVisible, setIsVisible] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLogoVisible, setIsLogoVisible] = useState(true);
+  const [isHeroVisible, setIsHeroVisible] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
+    
+    // ロゴを2秒後にフェードアウト
+    const logoTimer = setTimeout(() => {
+      setIsLogoVisible(false);
+    }, 2000);
+    
+    // Heroコンテンツを3秒後にフェードイン（ロゴのフェードアウト完了後）
+    const heroTimer = setTimeout(() => {
+      setIsHeroVisible(true);
+    }, 3000);
     
     const observerOptions = {
       threshold: 0.1,
@@ -30,7 +38,11 @@ export default function HomePage() {
     const animatedElements = document.querySelectorAll('.animate-on-scroll');
     animatedElements.forEach((el) => observer.observe(el));
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      clearTimeout(logoTimer);
+      clearTimeout(heroTimer);
+    };
   }, []);
 
   return (
@@ -102,21 +114,33 @@ export default function HomePage() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center" style={{backgroundImage: 'url(\'/hero.jpg\')', backgroundSize: 'cover', backgroundPosition: 'center'}}>
-        {/* Black overlay */}
-        <div className="absolute inset-0 bg-black/40"></div>
+      <section className="relative min-h-screen flex items-center justify-center">
+        {/* Background Image */}
+        <div 
+          className={`absolute inset-0 transition-opacity duration-1000 ${isHeroVisible ? 'opacity-100' : 'opacity-0'}`}
+          style={{backgroundImage: 'url(\'/hero.jpg\')', backgroundSize: 'cover', backgroundPosition: 'center'}}
+        ></div>
         
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className={`text-4xl md:text-6xl font-bold text-white mb-6 ${isVisible ? 'animate-fade-up' : 'opacity-0'}`}>
+        {/* Black overlay */}
+        <div className={`absolute inset-0 bg-black/40 transition-opacity duration-1000 ${isHeroVisible ? 'opacity-100' : 'opacity-0'}`}></div>
+        
+        {/* Logo Display */}
+        <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ${isLogoVisible ? 'opacity-100' : 'opacity-0'}`}>
+          <img src="/Blue.jpg" alt="BlueLeaf Studio Logo" className="max-w-[800px] w-full h-auto" />
+        </div>
+        
+        {/* Hero Content */}
+        <div className={`relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center transition-opacity duration-1000 ${isHeroVisible ? 'opacity-100' : 'opacity-0'}`}>
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
             園ごとの<span className="text-blue-300">"らしさ"</span>をカタチに、<br />
             <span className="text-green-300">魅力</span>を発信するホームページ
           </h1>
           <p className="text-xl md:text-2xl text-white mb-12 max-w-3xl mx-auto leading-relaxed text-center">
-  幼稚園・保育園専門のデザインと運用で<br className="sm:hidden" />
-  見学希望・入園相談を確実に増やします
-</p>
+            幼稚園・保育園専門のデザインと運用で<br className="sm:hidden" />
+            見学希望・入園相談を確実に増やします
+          </p>
 
-          <div className={`flex justify-center ${isVisible ? 'animate-fade-up' : 'opacity-0'}`} style={{animationDelay: '0.4s'}}>
+          <div className="flex justify-center">
             <a 
               href="#"
               className="bg-primary-green text-white px-12 py-6 rounded-full text-xl font-bold hover:bg-opacity-90 hover:-translate-y-2 hover:scale-110 transition-all duration-300 shadow-2xl inline-flex items-center"
@@ -129,7 +153,7 @@ export default function HomePage() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-24 bg-gray-50">
+      <section id="services" className="py-24 bg-gradient-to-b from-blue-100 via-white to-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20 animate-on-scroll">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -223,10 +247,10 @@ export default function HomePage() {
       </section>
 
       {/* Examples Section */}
-      <section id="examples" className="py-24 bg-white">
+      <section id="examples" className="py-24 bg-gradient-to-b from-blue-50 via-white to-green-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20 animate-on-scroll">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4">
               導入事例
             </h2>
             <p className="text-xl text-gray-600">
@@ -234,122 +258,88 @@ export default function HomePage() {
             </p>
           </div>
 
-          <Swiper
-            modules={[Autoplay, Pagination]}
-            spaceBetween={20}
-            slidesPerView={1}
-            breakpoints={{
-              640: {
-                slidesPerView: 2,
-                spaceBetween: 20,
+          {/* 事例データ */}
+          {(() => {
+            const examples = [
+              {
+                id: 1,
+                name: "さくら幼稚園",
+                children: "園児数120名",
+                result: "入園希望者120%増加",
+                comment: "ホームページリニューアル後、問い合わせ件数が倍増しました。",
+                image: "/Image_fx (1).jpg"
               },
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 30,
+              {
+                id: 2,
+                name: "みどり保育園",
+                children: "園児数85名",
+                result: "園児数85%増加",
+                comment: "写真ギャラリー機能が好評で、保護者から安心の声が寄せられています。",
+                image: "/Image_fx (2).jpg"
               },
-            }}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-            }}
-            pagination={{
-              clickable: true,
-            }}
-            className="mySwiper"
-          >
-            <SwiperSlide>
-              <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
-                {/* 上半分：背景画像 */}
-                <div 
-                  className="h-48 sm:h-56 relative flex items-center justify-center"
-                  style={{
-                    backgroundImage: 'url(\'/Image_fx (1).jpg\')',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
-                  }}
-                >
-                  {/* 半透明の黒いオーバーレイ */}
-                  <div className="absolute inset-0 bg-black/40"></div>
-                  {/* 背景画像の上にテキスト */}
-                  <div className="relative text-white text-center z-10 px-4">
-                    <h4 className="text-xl sm:text-2xl font-bold mb-2">さくら幼稚園</h4>
-                    <p className="text-base sm:text-lg">園児数120名</p>
-                  </div>
-                </div>
-                {/* 下半分：白地のテキスト部分 */}
-                <div className="p-6 sm:p-8 text-center">
-                  <p className="text-gray-600 mb-4 leading-relaxed">
-                    <span className="font-bold text-primary-green">入園希望者120%増加</span>
-                  </p>
-                  <p className="text-sm text-gray-500 italic">
-                    「ホームページリニューアル後、問い合わせ件数が倍増しました。」
-                  </p>
-                </div>
-              </div>
-            </SwiperSlide>
+              {
+                id: 3,
+                name: "ひまわり幼稚園",
+                children: "園児数200名",
+                result: "入園希望者200%増加",
+                comment: "ブログ更新機能を導入し、園の日常が伝わりやすくなりました。",
+                image: "/Image_fx (3).jpg"
+              }
+            ];
 
-            <SwiperSlide>
-              <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
-                {/* 上半分：背景画像 */}
-                <div 
-                  className="h-48 sm:h-56 relative flex items-center justify-center"
-                  style={{
-                    backgroundImage: 'url(\'/Image_fx (2).jpg\')',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
-                  }}
-                >
-                  {/* 半透明の黒いオーバーレイ */}
-                  <div className="absolute inset-0 bg-black/40"></div>
-                  {/* 背景画像の上にテキスト */}
-                  <div className="relative text-white text-center z-10 px-4">
-                    <h4 className="text-xl sm:text-2xl font-bold mb-2">みどり保育園</h4>
-                    <p className="text-base sm:text-lg">園児数85名</p>
+            return (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {examples.map((example) => (
+                  <div
+                    key={example.id}
+                    className="group relative h-80 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 ease-out"
+                    style={{
+                      backgroundImage: `url('${example.image}')`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center'
+                    }}
+                  >
+                    {/* ホバー時のズームエフェクト */}
+                    <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
+                         style={{
+                           backgroundImage: `url('${example.image}')`,
+                           backgroundSize: 'cover',
+                           backgroundPosition: 'center'
+                         }}
+                    ></div>
+                    
+                    {/* 下半分の黒い透明グラデーション */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                    
+                    {/* コンテンツ */}
+                    <div className="relative h-full flex flex-col justify-end p-6 text-white">
+                      {/* 園名と園児数 */}
+                      <div className="mb-4">
+                        <h3 className="text-2xl sm:text-3xl font-bold mb-2">
+                          {example.name}
+                        </h3>
+                        <p className="text-lg sm:text-xl font-medium opacity-90">
+                          {example.children}
+                        </p>
+                      </div>
+                      
+                      {/* 成果（グリーンアクセント） */}
+                      <div className="mb-4">
+                        <p className="text-lg sm:text-xl font-bold text-green-700">
+                          {example.result}
+                        </p>
+                      </div>
+                      
+                      {/* コメント */}
+                      <p className="text-sm sm:text-base opacity-90 leading-relaxed italic">
+                        「{example.comment}」
+                      </p>
+                    </div>
                   </div>
-                </div>
-                {/* 下半分：白地のテキスト部分 */}
-                <div className="p-6 sm:p-8 text-center">
-                  <p className="text-gray-600 mb-4 leading-relaxed">
-                    <span className="font-bold text-primary-green">園児数85%増加</span>
-                  </p>
-                  <p className="text-sm text-gray-500 italic">
-                    「写真ギャラリー機能が好評で、保護者から安心の声が寄せられています。」
-                  </p>
-                </div>
+                ))}
               </div>
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
-                {/* 上半分：背景画像 */}
-                <div 
-                  className="h-48 sm:h-56 relative flex items-center justify-center"
-                  style={{
-                    backgroundImage: 'url(\'/Image_fx (3).jpg\')',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
-                  }}
-                >
-                  {/* 半透明の黒いオーバーレイ */}
-                  <div className="absolute inset-0 bg-black/40"></div>
-                  {/* 背景画像の上にテキスト */}
-                  <div className="relative text-white text-center z-10 px-4">
-                    <h4 className="text-xl sm:text-2xl font-bold mb-2">ひまわり幼稚園</h4>
-                    <p className="text-base sm:text-lg">園児数200名</p>
-                  </div>
-                </div>
-                {/* 下半分：白地のテキスト部分 */}
-                <div className="p-6 sm:p-8 text-center">
-                  <p className="text-gray-600 mb-4 leading-relaxed">
-                    <span className="font-bold text-primary-green">入園希望者200%増加</span>
-                  </p>
-                  <p className="text-sm text-gray-500 italic">
-                    「ブログ更新機能を導入し、園の日常が伝わりやすくなりました。」
-                  </p>
-                </div>
-              </div>
-            </SwiperSlide>
-          </Swiper>
+            );
+          })()}
         </div>
       </section>
 
